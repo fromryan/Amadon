@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Amadon</title>
+</head>
+<body>
+
+
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">AMADON Store!</h1>
+            <p class="lead">Choose your item and click 'Buy!' to checkout!</p>
+            <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for product in all_products %}
+                        <tr>
+                            <form action="/{{new_order.id}}/buying_process" method="post">
+                                {% csrf_token %}
+                                <td>{{product.description}}</td>
+                                <td><input type="hidden" name="price" value="{{product.price}}">{{product.price}}</td>
+                                <td><select name="quantity">
+                                    <option value="1">1</option>              
+                                    <option value="2">2</option>              
+                                    <option value="3">3</option>              
+                                </select></td>
+                                <td><input type="submit" value="Buy!"></td>
+                            </form>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    
+</body>
+</html>
